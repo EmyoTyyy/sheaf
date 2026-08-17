@@ -98,7 +98,7 @@
                     d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"
                   />
                 </svg>
-                Download for Linux
+                Download
               </a>
               <a class="button button--ghost" href="https://github.com/emyotyyy/sheaf" rel="noopener"
                 >View on GitHub</a
@@ -318,8 +318,8 @@
           <div class="section__head" data-reveal>
             <h2>Install</h2>
             <p>
-              Version 0.1.0. Linux builds are on the releases page. macOS and Windows are not
-              packaged yet, and both build from source with the commands below.
+              Version 0.1.0. Linux and Windows builds are on the releases page. macOS is not
+              packaged yet and builds from source with the commands below.
             </p>
           </div>
 
@@ -351,6 +351,29 @@
             </div>
 
             <div class="card" data-reveal style="--i: 1">
+              <h3>Windows</h3>
+              <p>
+                <code>Sheaf-Setup-0.1.0.exe</code> installs Sheaf, adds it to the Start menu and
+                registers .tex, .bib, .sty and .cls.
+              </p>
+              <p>
+                The build is not signed, so SmartScreen stops it the first time. Choose
+                <strong>More info</strong>, then <strong>Run anyway</strong>.
+              </p>
+
+              <h3 style="margin-top: 22px">Without installing</h3>
+              <p>
+                <code>Sheaf-0.1.0-portable.exe</code> is the whole application in one file. It runs
+                from wherever you put it, with nothing to install and nothing to uninstall.
+              </p>
+              <p>
+                <a href="https://github.com/emyotyyy/sheaf/releases/latest" rel="noopener"
+                  >Latest release</a
+                >
+              </p>
+            </div>
+
+            <div class="card" data-reveal style="--i: 2">
               <h3>From source</h3>
               <p>Node 18 or newer.</p>
               <pre><code><span class="prompt">$</span> git clone https://github.com/emyotyyy/sheaf
@@ -365,7 +388,7 @@
             </div>
           </div>
 
-          <div class="note" data-reveal style="--i: 2">
+          <div class="note" data-reveal style="--i: 3">
             <strong>Sheaf does not bundle a TeX distribution.</strong> Install TeX Live, MacTeX or
             MiKTeX first. Sheaf looks for the tools on your PATH and tells you which ones it could
             not find. On Debian and Ubuntu a workable starting point is

@@ -99,9 +99,14 @@ win:
   icon: build/icon.ico
 
 nsis:
+  # The default names carry spaces, which turn into %20 in a download URL.
+  artifactName: ${productName}-Setup-${version}.${ext}
   oneClick: false
   perMachine: false
   allowToChangeInstallationDirectory: true
   createDesktopShortcut: true
   createStartMenuShortcut: true
   shortcutName: Sheaf
+
+portable:
+  artifactName: ${productName}-${version}-portable.${ext}

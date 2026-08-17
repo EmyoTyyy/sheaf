@@ -51,7 +51,8 @@ npm run dev          # development, with hot reload for the interface
 npm test             # 47 tests over the parsers, filesystem and build pipeline
 npm run test:latex   # 12 more against your real TeX installation
 npm run build        # typecheck plus a production bundle in out/
-npm run dist:linux   # installable packages in release/
+npm run dist:linux   # .deb and AppImage in release/
+npm run dist:win     # NSIS installer and portable .exe in release/
 ```
 
 ### Try it on the example project
