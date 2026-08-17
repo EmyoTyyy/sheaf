@@ -1,0 +1,176 @@
+.editor-pane {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 0;
+  background: var(--bg);
+}
+
+.editor-pane__body {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+
+.editor-pane__empty {
+  position: absolute;
+  inset: 0;
+}
+
+.editor-host {
+  position: absolute;
+  inset: 0;
+}
+
+/* ---------------- tabs ---------------- */
+
+.tabbar {
+  display: flex;
+  height: var(--size-tabbar);
+  flex: none;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-panel);
+  scrollbar-width: none;
+}
+
+.tabbar::-webkit-scrollbar {
+  height: 0;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 100%;
+  padding: 0 4px 0 10px;
+  border-right: 1px solid var(--border);
+  color: var(--text-dim);
+  white-space: nowrap;
+  flex: none;
+  max-width: 220px;
+  border-top: 1px solid transparent;
+}
+
+.tab:hover {
+  background: var(--bg-hover);
+}
+
+.tab--active {
+  background: var(--bg);
+  border-top-color: var(--accent);
+  color: var(--text-strong);
+}
+
+.tab__icon {
+  color: var(--text-faint);
+}
+
+.tab--active .tab__icon {
+  color: var(--accent);
+}
+
+.tab__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tab__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 2px;
+  color: var(--text-faint);
+  opacity: 0;
+}
+
+.tab:hover .tab__close,
+.tab--active .tab__close {
+  opacity: 1;
+}
+
+.tab__close:hover {
+  background: var(--bg-active);
+  color: var(--text);
+}
+
+.tab__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* ---------------- reveal highlight ---------------- */
+
+.sheaf-reveal-line {
+  background: var(--accent-subtle);
+  box-shadow: inset 2px 0 0 var(--accent);
+  transition: background 400ms ease-out;
+}
+
+/* ---------------- binary preview ---------------- */
+
+.preview {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--pdf-backdrop);
+}
+
+.preview__toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: var(--size-toolbar);
+  padding: 0 8px;
+  flex: none;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-panel);
+}
+
+.preview__name {
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  min-width: 0;
+}
+
+.preview__spacer {
+  flex: 1;
+}
+
+.preview__zoom {
+  min-width: 42px;
+  text-align: center;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.preview__canvas {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.preview__image {
+  max-width: none;
+  transform-origin: center center;
+  background: #fff;
+  box-shadow: var(--pdf-page-shadow);
+  image-rendering: auto;
+}
+
+.preview__pdf {
+  width: 100%;
+  height: 100%;
+  border: none;
+}

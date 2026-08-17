@@ -1,0 +1,12 @@
+node_modules/
+out/
+release/
+dist/
+*.log
+.DS_Store
+
+# Copied from pdfjs-dist by scripts/copy-pdfjs-assets.mjs on install
+src/renderer/public/pdfjs/
+
+# Build output produced when the example project is compiled
+examples/**/.sheaf/

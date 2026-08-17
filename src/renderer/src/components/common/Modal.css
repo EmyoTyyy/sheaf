@@ -1,0 +1,120 @@
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 8vh 16px 16px;
+  background: var(--bg-overlay);
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  max-height: 84vh;
+  max-width: 100%;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  background: var(--bg-panel);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.modal--tall {
+  height: 84vh;
+}
+
+.modal__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 12px 12px 16px;
+  border-bottom: 1px solid var(--border);
+  flex: none;
+}
+
+.modal__titles {
+  flex: 1;
+  min-width: 0;
+}
+
+.modal__titles h2 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+.modal__titles p {
+  margin: 3px 0 0;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+.modal__body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 16px;
+}
+
+.modal__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 10px 16px;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+  flex: none;
+}
+
+.modal__footer--split {
+  justify-content: space-between;
+}
+
+/* Shared form layout used by the dialogs. */
+
+.field {
+  margin-bottom: 14px;
+}
+
+.field:last-child {
+  margin-bottom: 0;
+}
+
+.field__label {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+.field__hint {
+  margin: 5px 0 0;
+  color: var(--text-faint);
+  line-height: 1.5;
+}
+
+.field__row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  gap: 10px 14px;
+  align-items: center;
+}
+
+.field-grid__label {
+  color: var(--text-dim);
+  text-align: right;
+}
+
+.field-grid__full {
+  grid-column: 1 / -1;
+}

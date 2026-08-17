@@ -1,0 +1,19 @@
+.workbench {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--bg);
+}
+
+.workbench__main {
+  flex: 1;
+  min-height: 0;
+}
+
+.workbench--zen .workbench__main {
+  max-width: 100%;
+}
+
+.workbench--zen .editor-pane {
+  padding: 0;
+}

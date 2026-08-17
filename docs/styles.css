@@ -1,0 +1,828 @@
+/*
+ * Sheaf website.
+ *
+ * Palette and type are taken from the application itself, so the page and the
+ * product read as the same thing. Radius scale is deliberately tight: cards
+ * 10px, controls 8px, insets 6px, and nothing else.
+ */
+
+/*
+ * The pairing bento.page uses: Fraunces for the headings and Instrument Sans
+ * for everything else, both open licence and served from here rather than from
+ * a font CDN. JetBrains Mono is the face the editor itself uses, so code on the
+ * page matches code in the application.
+ */
+@font-face {
+  font-family: 'Fraunces';
+  src: url('fonts/fraunces-latin-wght-normal.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Instrument Sans';
+  src: url('fonts/instrument-sans-latin-wght-normal.woff2') format('woff2-variations');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('fonts/jetbrains-mono-latin-wght-normal.woff2') format('woff2-variations');
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font: 'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --mono: 'JetBrains Mono', ui-monospace, 'DejaVu Sans Mono', Menlo, monospace;
+
+  --page: #f4f6f9;
+  --surface: #fdfdfe;
+  --surface-sunken: #eaeef3;
+  --border: #dee3ea;
+  --border-strong: #c4ccd7;
+
+  --text: #14181d;
+  --text-body: #3d454f;
+  --text-dim: #626b78;
+
+  /* The application's own blue. The deep step carries text and buttons at
+     WCAG AA; the bright one is only ever decoration. */
+  --accent: #2f6fbf;
+  --accent-hover: #2a63ab;
+  --accent-fg: #ffffff;
+  --accent-bright: 82, 146, 217;
+  --accent-wash: rgba(47, 111, 191, 0.09);
+
+  --shade: rgba(20, 24, 30, 0.07);
+  --shade-strong: rgba(20, 24, 30, 0.13);
+
+  --radius-card: 10px;
+  --radius-control: 8px;
+  --radius-inset: 6px;
+
+  --gutter: 24px;
+  --measure: 1200px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #0e1013;
+    --surface: #16181c;
+    --surface-sunken: #101216;
+    --border: #24282f;
+    --border-strong: #363c45;
+
+    --text: #f2f5f9;
+    --text-body: #b6bfcb;
+    --text-dim: #8b95a5;
+
+    --accent: #5292d9;
+    --accent-hover: #63a0e4;
+    --accent-fg: #0b1119;
+    --accent-bright: 82, 146, 217;
+    --accent-wash: rgba(82, 146, 217, 0.14);
+
+    --shade: rgba(0, 0, 0, 0.45);
+    --shade-strong: rgba(0, 0, 0, 0.6);
+
+    color-scheme: dark;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  position: relative;
+  margin: 0;
+  background: var(--page);
+  color: var(--text-body);
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* The one place on the page that carries colour: a warm field behind the
+   masthead and the headline, gone by the time the tiles start. It sits on the
+   body rather than on the hero so it runs behind the header with no seam. */
+body::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 860px;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      44% 62% at 16% 40%,
+      rgba(var(--accent-bright), 0.28),
+      rgba(var(--accent-bright), 0) 72%
+    ),
+    radial-gradient(40% 50% at 66% 4%, rgba(var(--accent-bright), 0.14), transparent 74%);
+}
+
+@media (prefers-color-scheme: dark) {
+  body::before {
+    background:
+      radial-gradient(
+        44% 62% at 16% 40%,
+        rgba(var(--accent-bright), 0.17),
+        rgba(var(--accent-bright), 0) 72%
+      ),
+      radial-gradient(40% 50% at 66% 4%, rgba(var(--accent-bright), 0.09), transparent 74%);
+  }
+}
+
+/* height:auto matters: the width and height attributes are on every image for
+   layout stability, and without it a constrained width leaves the attribute
+   height behind and stretches the picture. */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+h1,
+h2 {
+  color: var(--text);
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+/* Tile headings stay in the body face: a serif at this size in a grid of small
+   cards reads as clutter rather than as voice. */
+h3 {
+  color: var(--text);
+  font-weight: 560;
+  letter-spacing: -0.015em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.9em;
+}
+
+.wrap {
+  max-width: var(--measure);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+}
+
+.skip:focus {
+  left: var(--gutter);
+  top: 12px;
+  z-index: 20;
+  padding: 8px 14px;
+  background: var(--accent);
+  color: var(--accent-fg);
+  border-radius: var(--radius-control);
+}
+
+:where(a, button, summary):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-inset);
+}
+
+/* ---------------------------------------------------------------- nav ---- */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  /* Transparent over the warm field at the top, and only becomes a bar once
+     content has to pass underneath it. */
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    border-color 200ms var(--ease),
+    background-color 200ms var(--ease);
+}
+
+.nav--stuck {
+  background: color-mix(in srgb, var(--page) 86%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom-color: var(--border);
+}
+
+.nav .wrap {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  width: 100%;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.1875rem;
+  letter-spacing: -0.015em;
+  color: var(--text);
+  text-decoration: none;
+  margin-right: auto;
+}
+
+.brand svg {
+  width: 22px;
+  height: 22px;
+  color: var(--accent);
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.nav__links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.9375rem;
+  transition: color 140ms var(--ease);
+}
+
+.nav__links a:hover {
+  color: var(--text);
+}
+
+.nav__icon {
+  display: inline-flex;
+  color: var(--text-dim);
+  transition: color 140ms var(--ease);
+}
+
+.nav__icon:hover {
+  color: var(--text);
+}
+
+.nav__icon svg {
+  width: 21px;
+  height: 21px;
+}
+
+@media (max-width: 640px) {
+  .nav__links a[data-secondary] {
+    display: none;
+  }
+
+  .nav .wrap {
+    gap: 18px;
+  }
+
+  .nav__links {
+    gap: 18px;
+  }
+}
+
+/* --------------------------------------------------------------- hero ---- */
+
+.hero {
+  padding-block: clamp(40px, 5vw, 64px) clamp(48px, 6vw, 80px);
+  overflow: hidden;
+}
+
+.hero__inner {
+  display: grid;
+  gap: clamp(32px, 3.6vw, 48px);
+  align-items: center;
+  max-width: var(--measure);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+@media (min-width: 1000px) {
+  .hero__inner {
+    grid-template-columns: minmax(420px, 6fr) minmax(0, 7fr);
+  }
+}
+
+/* Sized so the headline holds two lines in the hero column at every width the
+   split layout is used at. */
+h1 {
+  font-size: clamp(2.25rem, 3.9vw, 3.25rem);
+  line-height: 1.03;
+  letter-spacing: -0.028em;
+  font-weight: 700;
+}
+
+/* One word of the headline in the accent, which is the whole claim: never. */
+.hl {
+  color: var(--accent);
+}
+
+.hero__sub {
+  margin: 22px 0 0;
+  font-size: clamp(1.0625rem, 1.5vw, 1.1875rem);
+  line-height: 1.55;
+  max-width: 34ch;
+  color: var(--text-body);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border-radius: var(--radius-control);
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  white-space: nowrap;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition:
+    transform 140ms var(--ease),
+    background-color 140ms var(--ease),
+    border-color 140ms var(--ease);
+}
+
+.button svg {
+  width: 17px;
+  height: 17px;
+}
+
+.button--primary {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+
+.button--primary:hover {
+  background: var(--accent-hover);
+}
+
+.button--ghost {
+  background: var(--surface);
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+
+.button--ghost:hover {
+  border-color: var(--text-dim);
+}
+
+.button:active {
+  transform: translateY(1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button:active {
+    transform: none;
+  }
+}
+
+.hero__media {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: 0 24px 60px -20px var(--shade-strong);
+  background: var(--surface);
+}
+
+@media (min-width: 1000px) {
+  /* Cropped a little at the bottom so the window still reads as a window
+     without pushing the buttons out of the viewport. */
+  .hero__media {
+    max-height: min(58vh, 540px);
+  }
+}
+
+/* ------------------------------------------------------------ sections --- */
+
+.section {
+  padding-block: clamp(56px, 8vw, 104px);
+}
+
+.section__head {
+  max-width: 46ch;
+  margin-bottom: clamp(28px, 4vw, 44px);
+}
+
+.section__head h2 {
+  font-size: clamp(1.875rem, 3.4vw, 2.625rem);
+  line-height: 1.15;
+}
+
+.section__head p {
+  margin: 14px 0 0;
+  font-size: 1.0625rem;
+  color: var(--text-dim);
+}
+
+/* ---------------------------------------------------------- bento grid --- */
+
+.bento {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: minmax(200px, auto);
+  gap: 14px;
+}
+
+.tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 22px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+.tile h3 {
+  font-size: 1.0625rem;
+  line-height: 1.35;
+}
+
+.tile p {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--text-dim);
+  max-width: 46ch;
+}
+
+/* Each crop was cut at the size of the slot it lands in, so the strip keeps the
+   image's own proportions and sits against the bottom edge of its tile. */
+.tile__shot {
+  margin: 16px -22px -22px;
+  margin-top: auto;
+  border-top: 1px solid var(--border);
+  overflow: hidden;
+  flex: 0 0 auto;
+}
+
+.tile__shot picture {
+  display: block;
+}
+
+.tile__shot img {
+  width: 100%;
+  height: auto;
+}
+
+.tile__icon {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-inset);
+  background: var(--accent-wash);
+  color: var(--accent);
+  margin-bottom: 2px;
+}
+
+.tile__icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.tile--wide {
+  grid-column: span 2;
+}
+
+/* The closing tile runs the full width, so it reads across rather than down. */
+.tile--full {
+  grid-column: span 4;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+  padding-block: 28px;
+}
+
+.tile--full > div:first-child {
+  flex: 0 0 34%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.tile--full .tile__icon {
+  flex: 0 0 auto;
+  margin-bottom: 0;
+}
+
+.tile--full h3 {
+  font-size: 1.25rem;
+}
+
+.tile--full p {
+  max-width: 58ch;
+}
+
+/* The offline tile carries the accent as a field rather than a swatch, so the
+   grid is not six flat cards in a row. */
+.tile--tinted {
+  background:
+    radial-gradient(120% 140% at 8% 0%, var(--accent-wash), transparent 62%),
+    var(--surface);
+}
+
+.tile--split {
+  flex-direction: row;
+  align-items: stretch;
+  gap: 24px;
+}
+
+.tile--split > div:first-child {
+  flex: 1 1 46%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+}
+
+.tile--split .tile__shot {
+  flex: 1 1 52%;
+  min-width: 0;
+  margin: -22px -22px -22px 0;
+  border-top: 0;
+  border-left: 1px solid var(--border);
+}
+
+.tile--split .tile__shot picture,
+.tile--split .tile__shot img {
+  height: 100%;
+  object-fit: cover;
+  object-position: left top;
+}
+
+@media (max-width: 940px) {
+  .bento {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tile--full {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 620px) {
+  .bento {
+    grid-template-columns: minmax(0, 1fr);
+    grid-auto-rows: auto;
+  }
+
+  .tile--wide,
+  .tile--full {
+    grid-column: span 1;
+  }
+
+  .tile--split,
+  .tile--full {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .tile--full > div:first-child {
+    flex: 0 0 auto;
+  }
+
+  .tile--split .tile__shot {
+    margin: 6px -22px -22px;
+    border-left: 0;
+    border-top: 1px solid var(--border);
+    min-height: 160px;
+  }
+}
+
+/* -------------------------------------------------------------- passes --- */
+
+.build {
+  background: var(--surface-sunken);
+  border-block: 1px solid var(--border);
+}
+
+.build__grid {
+  display: grid;
+  gap: clamp(32px, 4vw, 52px);
+  align-items: start;
+}
+
+@media (min-width: 900px) {
+  .build__grid {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 6fr);
+  }
+}
+
+.lede {
+  margin: 14px 0 0;
+  color: var(--text-dim);
+  max-width: 52ch;
+}
+
+.passes {
+  list-style: none;
+  margin: 26px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-inset);
+  overflow: hidden;
+}
+
+.passes li {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 11px 14px;
+  background: var(--surface);
+  font-size: 0.875rem;
+}
+
+.passes b {
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 0.8125rem;
+  color: var(--text);
+  min-width: 8ch;
+}
+
+.passes span {
+  color: var(--text-dim);
+}
+
+.build__shot {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: 0 18px 44px -22px var(--shade);
+}
+
+/* ------------------------------------------------------------- install --- */
+
+.install__grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 24px;
+}
+
+.card h3 {
+  font-size: 1.0625rem;
+  margin-bottom: 4px;
+}
+
+.card p {
+  margin: 0 0 16px;
+  font-size: 0.9375rem;
+  color: var(--text-dim);
+}
+
+.card p:last-child {
+  margin-bottom: 0;
+}
+
+pre {
+  margin: 0 0 14px;
+  padding: 13px 15px;
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-inset);
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+pre .prompt {
+  color: var(--text-dim);
+  user-select: none;
+}
+
+.note {
+  margin-top: 14px;
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--accent);
+  border-radius: var(--radius-inset);
+  background: var(--surface);
+  font-size: 0.9375rem;
+  color: var(--text-dim);
+}
+
+.note strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* -------------------------------------------------------------- footer --- */
+
+.footer {
+  border-top: 1px solid var(--border);
+  padding-block: 40px 48px;
+  font-size: 0.875rem;
+  color: var(--text-dim);
+}
+
+.footer .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 32px;
+  align-items: center;
+}
+
+.footer p {
+  margin: 0;
+}
+
+.footer nav {
+  display: flex;
+  gap: 22px;
+  margin-left: auto;
+}
+
+.footer a {
+  color: var(--text-dim);
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: var(--text);
+}
+
+/* -------------------------------------------------------------- motion --- */
+
+/* Hiding is applied by script, so a reader without JavaScript, or one whose
+   observer never fires, still gets the whole page. */
+@media (prefers-reduced-motion: no-preference) {
+  .js-reveal [data-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 620ms var(--ease),
+      transform 620ms var(--ease);
+    transition-delay: calc(var(--i, 0) * 70ms);
+  }
+
+  .js-reveal [data-reveal].is-in {
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sheaf</title>
+    <meta
+      name="description"
+      content="A local-first LaTeX editor. Sheaf opens a folder of .tex files, compiles with the TeX installed on your machine, and shows the PDF beside your source."
+    />
+    <link rel="icon" href="assets/mark.png" />
+    <link rel="canonical" href="https://emyotyyy.github.io/sheaf/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Sheaf" />
+    <meta
+      property="og:description"
+      content="A local-first LaTeX editor. Your project stays a folder of files; your own TeX install does the compiling."
+    />
+    <meta property="og:url" content="https://emyotyyy.github.io/sheaf/" />
+    <meta property="og:image" content="https://emyotyyy.github.io/sheaf/assets/social.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link
+      rel="preload"
+      href="fonts/fraunces-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="fonts/instrument-sans-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="styles.css" />
+
+    <script>
+      // Sections only start hidden when something is here to show them again.
+      if (
+        'IntersectionObserver' in window &&
+        !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      ) {
+        document.documentElement.classList.add('js-reveal')
+      }
+    </script>
+  </head>
+
+  <body id="top">
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="nav" id="nav">
+      <div class="wrap">
+        <a class="brand" href="#top">
+          <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+            <path
+              fill-rule="evenodd"
+              d="M16 26.4C3.0 22.6 6.2 5.2 16 1.8C25.8 5.2 29.0 22.6 16 26.4ZM15.15 25.8h1.7v4.6h-1.7ZM15.25 4.8h1.5v20.6h-1.5ZM16.75 9.15h4.25v1.5h-4.25ZM16.75 12.85h5.85v1.5h-5.85ZM16.75 16.55h2.65v1.5h-2.65ZM16.75 20.25h3.45v1.5h-3.45Z"
+            />
+          </svg>
+          Sheaf
+        </a>
+        <nav class="nav__links">
+          <a href="#features">Features</a>
+          <a href="#build" data-secondary>Builds</a>
+          <a href="#install">Install</a>
+          <a
+            class="nav__icon"
+            href="https://github.com/emyotyyy/sheaf"
+            aria-label="GitHub"
+            rel="noopener"
+          >
+            <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
+              <path
+                d="M208.31,75.68A59.78,59.78,0,0,0,202.93,28,8,8,0,0,0,196,24a59.75,59.75,0,0,0-48,24H124A59.75,59.75,0,0,0,76,24a8,8,0,0,0-6.93,4,59.78,59.78,0,0,0-5.38,47.68A58.14,58.14,0,0,0,56,104v8a56.06,56.06,0,0,0,48.44,55.47A39.8,39.8,0,0,0,96,192v8H72a24,24,0,0,1-24-24A40,40,0,0,0,8,136a8,8,0,0,0,0,16,24,24,0,0,1,24,24,40,40,0,0,0,40,40H96v16a8,8,0,0,0,16,0V192a24,24,0,0,1,48,0v40a8,8,0,0,0,16,0V192a39.8,39.8,0,0,0-8.44-24.53A56.06,56.06,0,0,0,216,112v-8A58.14,58.14,0,0,0,208.31,75.68ZM200,112a40,40,0,0,1-40,40H112a40,40,0,0,1-40-40v-8a41.74,41.74,0,0,1,6.9-22.48A8,8,0,0,0,80,73.83a43.81,43.81,0,0,1,.79-33.58,43.88,43.88,0,0,1,32.32,20.06A8,8,0,0,0,119.82,64h32.35a8,8,0,0,0,6.74-3.69,43.87,43.87,0,0,1,32.32-20.06A43.81,43.81,0,0,1,192,73.83a8.09,8.09,0,0,0,1,7.65A41.72,41.72,0,0,1,200,104Z"
+              />
+            </svg>
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+        <div class="hero__inner">
+          <div>
+            <h1>LaTeX that <span class="hl">never</span> leaves your disk.</h1>
+            <p class="hero__sub">
+              Open a folder of .tex files. Sheaf compiles with your TeX install and shows the PDF
+              beside your source.
+            </p>
+            <div class="hero__actions">
+              <a class="button button--primary" href="#install">
+                <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
+                  <path
+                    d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"
+                  />
+                </svg>
+                Download for Linux
+              </a>
+              <a class="button button--ghost" href="https://github.com/emyotyyy/sheaf" rel="noopener"
+                >View on GitHub</a
+              >
+            </div>
+          </div>
+
+          <div class="hero__media">
+            <picture>
+              <source
+                srcset="assets/hero-dark.webp"
+                media="(prefers-color-scheme: dark)"
+                width="2200"
+                height="1375"
+              />
+              <img
+                src="assets/hero-light.webp"
+                width="2200"
+                height="1375"
+                fetchpriority="high"
+                alt="The Sheaf window: a file tree on the left, a chapter of LaTeX source in the middle, and the compiled page with its figure and table on the right."
+              />
+            </picture>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+        <div class="wrap">
+          <div class="section__head" data-reveal>
+            <h2>Made for whole projects, not snippets.</h2>
+            <p>The things that go wrong in a long document are the things Sheaf pays attention to.</p>
+          </div>
+
+          <div class="bento">
+            <article class="tile tile--wide" data-reveal style="--i: 0">
+              <h3>Errors land on the line you wrote.</h3>
+              <p>
+                Sheaf reads the engine log and follows it back through every <code>\input</code>, so
+                a mistake in a chapter points at that chapter instead of at
+                <code>main.tex</code>. Click the problem to open the line.
+              </p>
+              <div class="tile__shot">
+                <picture>
+                  <source
+                    srcset="assets/errors-dark.webp"
+                    media="(prefers-color-scheme: dark)"
+                    width="1180"
+                    height="330"
+                  />
+                  <img
+                    src="assets/errors-light.webp"
+                    width="1180"
+                    height="330"
+                    loading="lazy"
+                    alt="The Problems panel listing an error at chapters/results.tex line 4, Undefined control sequence, above an uncited bibliography entry."
+                  />
+                </picture>
+              </div>
+            </article>
+
+            <article class="tile" data-reveal style="--i: 1">
+              <h3>A project is just a folder.</h3>
+              <p>No import step and no database. Your files stay where you put them.</p>
+              <div class="tile__shot">
+                <picture>
+                  <source
+                    srcset="assets/files-dark.webp"
+                    media="(prefers-color-scheme: dark)"
+                    width="492"
+                    height="286"
+                  />
+                  <img
+                    src="assets/files-light.webp"
+                    width="492"
+                    height="286"
+                    loading="lazy"
+                    alt="The file tree showing a chapters folder with four .tex files inside it."
+                  />
+                </picture>
+              </div>
+            </article>
+
+            <article class="tile" data-reveal style="--i: 2">
+              <div class="tile__icon">
+                <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
+                  <path
+                    d="M213.66,181.66l-32,32a8,8,0,0,1-11.32-11.32L188.69,184H48a8,8,0,0,1,0-16H188.69l-18.35-18.34a8,8,0,0,1,11.32-11.32l32,32A8,8,0,0,1,213.66,181.66Zm-139.32-64a8,8,0,0,0,11.32-11.32L67.31,88H208a8,8,0,0,0,0-16H67.31L85.66,53.66A8,8,0,0,0,74.34,42.34l-32,32a8,8,0,0,0,0,11.32Z"
+                  />
+                </svg>
+              </div>
+              <h3>Source and page stay in step.</h3>
+              <p>
+                SyncTeX runs both ways. Jump from a line to its place in the PDF, or from the PDF
+                back to the line that made it.
+              </p>
+            </article>
+
+            <article class="tile tile--wide tile--split" data-reveal style="--i: 3">
+              <div>
+                <h3>Search every file at once.</h3>
+                <p>
+                  Plain text or a regular expression, across the whole project, with each match in
+                  context.
+                </p>
+              </div>
+              <div class="tile__shot">
+                <picture>
+                  <source
+                    srcset="assets/search-dark.webp"
+                    media="(prefers-color-scheme: dark)"
+                    width="510"
+                    height="492"
+                  />
+                  <img
+                    src="assets/search-light.webp"
+                    width="510"
+                    height="492"
+                    loading="lazy"
+                    alt="Project search reporting six results in three files, grouped by file with the matching line numbers."
+                  />
+                </picture>
+              </div>
+            </article>
+
+            <article class="tile tile--wide" data-reveal style="--i: 4">
+              <h3>It uses the TeX you already have.</h3>
+              <p>
+                pdflatex, xelatex, lualatex, latexmk or Tectonic. Sheaf finds them on your PATH and
+                marks the ones you have not installed, rather than failing halfway through a build.
+              </p>
+              <div class="tile__shot">
+                <picture>
+                  <source
+                    srcset="assets/engines-dark.webp"
+                    media="(prefers-color-scheme: dark)"
+                    width="1180"
+                    height="280"
+                  />
+                  <img
+                    src="assets/engines-light.webp"
+                    width="1180"
+                    height="280"
+                    loading="lazy"
+                    alt="A settings panel reporting that TeX Live 2023 was found, listing the path of each tool it detected."
+                  />
+                </picture>
+              </div>
+            </article>
+
+            <article class="tile tile--full tile--tinted" data-reveal style="--i: 5">
+              <div>
+                <div class="tile__icon">
+                  <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
+                    <path
+                      d="M213.92,210.62a8,8,0,1,1-11.84,10.76l-52-57.15a60,60,0,0,0-57.41,7.24,8,8,0,1,1-9.42-12.93A75.43,75.43,0,0,1,128,144c1.28,0,2.55,0,3.82.1L104.9,114.49A108,108,0,0,0,61,135.31,8,8,0,0,1,49.73,134,8,8,0,0,1,51,122.77a124.27,124.27,0,0,1,41.71-21.66L69.37,75.4a155.43,155.43,0,0,0-40.29,24A8,8,0,0,1,18.92,87,171.87,171.87,0,0,1,58,62.86L42.08,45.38A8,8,0,1,1,53.92,34.62ZM128,192a12,12,0,1,0,12,12A12,12,0,0,0,128,192ZM237.08,87A172.3,172.3,0,0,0,106,49.4a8,8,0,1,0,2,15.87A158.33,158.33,0,0,1,128,64a156.25,156.25,0,0,1,98.92,35.37A8,8,0,0,0,237.08,87ZM195,135.31a8,8,0,0,0,11.24-1.3,8,8,0,0,0-1.3-11.24,124.25,124.25,0,0,0-51.73-24.2A8,8,0,1,0,150,114.24,108.12,108.12,0,0,1,195,135.31Z"
+                    />
+                  </svg>
+                </div>
+                <h3>Nothing is uploaded.</h3>
+              </div>
+              <p>
+                No account, no server, no sync. Sheaf makes no network requests of its own, so the
+                same project builds on a plane, on a train, or on a machine that has never been
+                online.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section build" id="build">
+        <div class="wrap">
+          <div class="build__grid">
+            <div data-reveal>
+              <h2>One keystroke, as many passes as the document needs.</h2>
+              <p class="lede">
+                LaTeX rarely gets a document right in a single run. Sheaf reads the log after every
+                pass, runs bibtex or biber when the document asks for one, and goes again until the
+                log stops asking.
+              </p>
+              <ol class="passes">
+                <li><b>pdflatex</b><span>Records every reference and citation in the .aux file</span></li>
+                <li><b>bibtex</b><span>Turns those citations into a .bbl bibliography</span></li>
+                <li><b>pdflatex</b><span>Pulls the bibliography in, which moves the numbering</span></li>
+                <li><b>pdflatex</b><span>The numbering settles and the log stops asking</span></li>
+              </ol>
+              <p class="note">
+                Build output goes to <strong>.sheaf/build</strong>, so the .aux, .log and .pdf files
+                never end up next to your chapters.
+              </p>
+            </div>
+
+            <div class="build__shot" data-reveal style="--i: 1">
+              <picture>
+                <source
+                  srcset="assets/log-dark.webp"
+                  media="(prefers-color-scheme: dark)"
+                  width="1380"
+                  height="400"
+                />
+                <img
+                  src="assets/log-light.webp"
+                  width="1380"
+                  height="400"
+                  loading="lazy"
+                  alt="The raw log tab showing four engine runs that each exited 0, ending with the line Output written on .sheaf/build/main.pdf, 8 pages."
+                />
+              </picture>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="install">
+        <div class="wrap">
+          <div class="section__head" data-reveal>
+            <h2>Install</h2>
+            <p>
+              Version 0.1.0. Linux builds are on the releases page. macOS and Windows are not
+              packaged yet, and both build from source with the commands below.
+            </p>
+          </div>
+
+          <div class="install__grid">
+            <div class="card" data-reveal style="--i: 0">
+              <h3>Debian and Ubuntu</h3>
+              <p>Take the .deb from the releases page. This is the package to prefer.</p>
+              <pre><code><span class="prompt">$</span> sudo dpkg -i sheaf_0.1.0_amd64.deb</code></pre>
+              <p>
+                It adds Sheaf to your applications menu, registers .tex, .bib, .sty and .cls with
+                your file manager, and sets up the sandbox that Ubuntu 24.04 requires.
+              </p>
+
+              <h3 style="margin-top: 22px">Other distributions</h3>
+              <p>The AppImage runs without installing anything.</p>
+              <pre><code><span class="prompt">$</span> chmod +x Sheaf-0.1.0-x86_64.AppImage
+<span class="prompt">$</span> ./Sheaf-0.1.0-x86_64.AppImage</code></pre>
+              <p>
+                Ubuntu 24.04 blocks the sandbox an AppImage would normally use. Sheaf detects that
+                at launch and says so rather than refusing to start, but the package keeps the
+                sandbox and the AppImage cannot.
+                <a href="https://github.com/emyotyyy/sheaf#the-linux-sandbox">How that works</a>.
+              </p>
+              <p>
+                <a href="https://github.com/emyotyyy/sheaf/releases/latest" rel="noopener"
+                  >Latest release</a
+                >
+              </p>
+            </div>
+
+            <div class="card" data-reveal style="--i: 1">
+              <h3>From source</h3>
+              <p>Node 18 or newer.</p>
+              <pre><code><span class="prompt">$</span> git clone https://github.com/emyotyyy/sheaf
+<span class="prompt">$</span> cd sheaf
+<span class="prompt">$</span> npm install
+<span class="prompt">$</span> npm run dev</code></pre>
+              <p>
+                <code>npm run dist</code> packages Sheaf for the platform you are on.
+                <code>npm test</code> runs the unit suite, and <code>npm run test:latex</code> runs
+                the integration suite against your own TeX installation.
+              </p>
+            </div>
+          </div>
+
+          <div class="note" data-reveal style="--i: 2">
+            <strong>Sheaf does not bundle a TeX distribution.</strong> Install TeX Live, MacTeX or
+            MiKTeX first. Sheaf looks for the tools on your PATH and tells you which ones it could
+            not find. On Debian and Ubuntu a workable starting point is
+            <code>sudo apt install texlive-latex-recommended texlive-latex-extra biber</code>.
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap">
+        <p>Sheaf is free software under the MIT licence. Built on Electron, Monaco and pdf.js.</p>
+        <nav>
+          <a href="https://github.com/emyotyyy/sheaf" rel="noopener">Source</a>
+          <a href="https://github.com/emyotyyy/sheaf/releases" rel="noopener">Releases</a>
+          <a href="https://github.com/emyotyyy/sheaf/issues" rel="noopener">Issues</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script>
+      // Two observers, no scroll handler: one gives the sticky header its
+      // border once the page has moved, the other reveals sections as they
+      // arrive. Both stay quiet when the reader asks for less motion.
+      const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+      const sentinel = document.createElement('div')
+      sentinel.style.cssText = 'position:absolute;top:0;height:1px;width:1px'
+      document.body.prepend(sentinel)
+      new IntersectionObserver(
+        ([entry]) => document.getElementById('nav').classList.toggle('nav--stuck', !entry.isIntersecting),
+        { threshold: 0 }
+      ).observe(sentinel)
+
+      const revealed = document.querySelectorAll('[data-reveal]')
+      if (calm) {
+        revealed.forEach((node) => node.classList.add('is-in'))
+      } else {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (!entry.isIntersecting) continue
+              entry.target.classList.add('is-in')
+              observer.unobserve(entry.target)
+            }
+          },
+          { rootMargin: '0px 0px -48px', threshold: 0 }
+        )
+        revealed.forEach((node) => observer.observe(node))
+      }
+    </script>
+  </body>
+</html>

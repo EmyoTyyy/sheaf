@@ -1,0 +1,33 @@
+.statusbar {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: var(--size-statusbar);
+  padding: 0 6px;
+  flex: none;
+  border-top: 1px solid var(--border);
+  background: var(--bg-panel);
+  color: var(--text-dim);
+  font-size: 11px;
+}
+
+.statusbar__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: 2px;
+  color: inherit;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+button.statusbar__item:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.statusbar__spacer {
+  flex: 1;
+}

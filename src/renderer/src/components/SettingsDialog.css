@@ -1,0 +1,241 @@
+.settings {
+  display: flex;
+  gap: 18px;
+  height: 100%;
+  min-height: 0;
+  margin: -16px;
+}
+
+.settings__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  width: 168px;
+  flex: none;
+  padding: 12px 8px;
+  border-right: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.settings__nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 26px;
+  padding: 0 9px;
+  border-radius: var(--radius);
+  color: var(--text-dim);
+  text-align: left;
+}
+
+.settings__nav-item:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.settings__nav-item--active {
+  background: var(--accent-subtle);
+  color: var(--accent);
+}
+
+.settings__content {
+  flex: 1;
+  min-width: 0;
+  overflow: auto;
+  padding: 14px 18px 24px 0;
+}
+
+.settings__content h3 {
+  margin: 22px 0 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.settings__content section > h3:first-child {
+  margin-top: 0;
+}
+
+.settings__number {
+  width: 84px;
+  flex: none;
+}
+
+.settings__unit {
+  color: var(--text-faint);
+}
+
+.settings__checks {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.settings__toggle {
+  color: var(--text);
+}
+
+.settings__status {
+  display: flex;
+  gap: 10px;
+  padding: 11px 12px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--success);
+  border-radius: var(--radius);
+  background: var(--bg);
+  line-height: 1.55;
+}
+
+.settings__status--warn {
+  border-left-color: var(--warning);
+}
+
+.settings__status svg {
+  margin-top: 1px;
+  color: var(--success);
+}
+
+.settings__status--warn svg {
+  color: var(--warning);
+}
+
+.settings__status strong {
+  color: var(--text-strong);
+}
+
+.settings__status p {
+  margin: 5px 0 0;
+  color: var(--text-dim);
+}
+
+.settings__tools {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 8px;
+}
+
+.settings__tool {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 10px;
+  font-size: 11px;
+}
+
+.settings__tool-name {
+  color: var(--text);
+}
+
+.settings__tool-path {
+  color: var(--text-faint);
+  min-width: 0;
+}
+
+.settings__row-actions {
+  margin-top: 12px;
+}
+
+.settings__paths {
+  max-height: 180px;
+  margin: 10px 0 0;
+  padding: 8px 10px;
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-input);
+  color: var(--text-faint);
+  font-size: 11px;
+  line-height: 1.5;
+  user-select: text;
+}
+
+.settings__path {
+  margin-top: -8px;
+  margin-bottom: 14px;
+  font-size: 11px;
+  user-select: text;
+}
+
+.settings__command {
+  display: block;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-input);
+  color: var(--text-dim);
+  font-size: 11px;
+  line-height: 1.5;
+  word-break: break-all;
+  user-select: text;
+}
+
+.settings__content code.mono {
+  padding: 1px 4px;
+  border-radius: 2px;
+  background: var(--bg-active);
+  font-size: 11px;
+}
+
+.shortcuts__group h4 {
+  margin: 16px 0 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.shortcuts {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.shortcuts td {
+  padding: 3px 0;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--border);
+}
+
+.shortcuts__key {
+  width: 160px;
+  text-align: right;
+}
+
+.shortcuts__none {
+  color: var(--text-faint);
+  font-size: 10px;
+}
+
+.shortcuts__button {
+  min-width: 118px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 2px;
+  color: var(--text-dim);
+}
+
+.shortcuts__button:hover {
+  background: var(--bg-hover);
+}
+
+.shortcuts__button--recording {
+  background: var(--accent-subtle);
+  color: var(--accent);
+}
+
+.shortcuts__reset {
+  margin-left: 4px;
+  color: var(--text-faint);
+  vertical-align: middle;
+}
+
+.shortcuts__reset:hover {
+  color: var(--accent);
+}
+
+.shortcuts__conflict {
+  margin-left: 6px;
+  color: var(--warning);
+  font-size: 10px;
+}

@@ -1,0 +1,25 @@
+\chapter{Introduction}
+\label{ch:introduction}
+
+This project exists to be compiled. If the PDF on the right shows four
+chapters, a figure, a table and a bibliography, the whole pipeline works:
+the engine ran, \texttt{bibtex} resolved the citations, and the document was
+typeset more than once so the cross-references settled.
+
+\section{Motivation}
+\label{sec:motivation}
+
+Typesetting was invented for mathematics~\cite{knuth1984texbook}, and the
+document preparation system on top of it followed~\cite{lamport1994latex}.
+Both entries live in \texttt{bibliography.bib}; typing \verb|\cite{| in the
+editor should offer them by key, with the author and year alongside.
+
+\section{What to look at}
+
+Chapter~\ref{ch:methodology} contains a figure and a table.
+Chapter~\ref{ch:results} contains the mathematics. Every
+\verb|\ref| in this project resolves, so the Problems panel should be quiet
+until you deliberately break something.
+
+Inline maths sits in a sentence like $\vect{x} \in \mathbb{R}^{n}$, using the
+\verb|\vect| command defined in \texttt{main.tex}.

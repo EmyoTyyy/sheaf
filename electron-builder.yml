@@ -1,0 +1,107 @@
+appId: com.sheaf.editor
+productName: Sheaf
+copyright: Sheaf contributors
+
+directories:
+  output: release
+  buildResources: build
+
+# Wraps the Linux binary so it can still start on distributions that deny
+# unprivileged user namespaces. See scripts/after-pack.cjs.
+afterPack: scripts/after-pack.cjs
+
+files:
+  - out/**/*
+  - package.json
+  - '!**/*.map'
+
+# Registering these makes double-clicking a .tex file open it in Sheaf, in the
+# project it belongs to. The installer performs the registration; the running
+# application can also claim it later from Settings > Application.
+fileAssociations:
+  - ext: tex
+    name: LaTeX Document
+    description: LaTeX source document
+    mimeType: text/x-tex
+    role: Editor
+    rank: Owner
+    icon: build/icon.png
+  - ext: ltx
+    name: LaTeX Document
+    description: LaTeX source document
+    mimeType: text/x-tex
+    role: Editor
+    icon: build/icon.png
+  - ext: bib
+    name: BibTeX Bibliography
+    description: BibTeX bibliography database
+    mimeType: text/x-bibtex
+    role: Editor
+    icon: build/icon.png
+  - ext: sty
+    name: LaTeX Package
+    description: LaTeX style package
+    mimeType: text/x-tex
+    role: Editor
+    icon: build/icon.png
+  - ext: cls
+    name: LaTeX Class
+    description: LaTeX document class
+    mimeType: text/x-tex
+    role: Editor
+    icon: build/icon.png
+
+linux:
+  target:
+    - AppImage
+    - deb
+  category: Office;Publishing;TextEditor;Development
+  synopsis: Local-first LaTeX editor
+  description: >-
+    A LaTeX editor that keeps every project as ordinary files on your own disk
+    and compiles them with the TeX distribution installed on your machine.
+  maintainer: Sheaf contributors
+  icon: build
+  desktop:
+    Name: Sheaf
+    GenericName: LaTeX Editor
+    Comment: Local-first LaTeX editor
+    Terminal: 'false'
+    StartupNotify: 'true'
+    StartupWMClass: Sheaf
+    Keywords: latex;tex;bibtex;pdf;editor;typesetting;
+
+deb:
+  # Recommended rather than required: Sheaf runs without a TeX installation and
+  # explains what to install when compiling is attempted.
+  recommends:
+    - texlive-latex-recommended
+    - texlive-latex-extra
+    - latexmk
+    - biber
+
+appImage:
+  artifactName: ${productName}-${version}-${arch}.AppImage
+
+mac:
+  category: public.app-category.productivity
+  target:
+    - dmg
+    - zip
+  icon: build/icon.png
+  extendInfo:
+    NSHumanReadableCopyright: ''
+
+win:
+  target:
+    - nsis
+    - portable
+  icon: build/icon.ico
+
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: Sheaf

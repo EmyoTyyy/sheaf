@@ -1,0 +1,51 @@
+{
+  "name": "sheaf",
+  "productName": "Sheaf",
+  "version": "0.1.0",
+  "description": "A local-first LaTeX editor. Your projects stay as plain files on your disk; LaTeX compiles on your machine.",
+  "main": "./out/main/index.js",
+  "license": "MIT",
+  "private": true,
+  "author": "Sheaf contributors",
+  "homepage": "https://emyotyyy.github.io/sheaf",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "postinstall": "node scripts/copy-pdfjs-assets.mjs",
+    "assets": "node scripts/copy-pdfjs-assets.mjs",
+    "dev": "npm run assets && electron-vite dev",
+    "build": "npm run assets && npm run typecheck && electron-vite build",
+    "preview": "electron-vite preview",
+    "test": "node scripts/run-tests.mjs",
+    "test:latex": "node scripts/run-integration.mjs",
+    "typecheck": "tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.web.json",
+    "dist": "npm run build && electron-builder",
+    "dist:linux": "npm run build && electron-builder --linux",
+    "dist:win": "npm run build && electron-builder --win",
+    "dist:mac": "npm run build && electron-builder --mac",
+    "dist:dir": "npm run build && electron-builder --dir"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.16",
+    "chokidar": "^3.6.0"
+  },
+  "devDependencies": {
+    "@types/adm-zip": "^0.5.7",
+    "@types/node": "^20.17.9",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "electron": "^31.7.5",
+    "electron-builder": "^24.13.3",
+    "electron-vite": "^2.3.0",
+    "monaco-editor": "^0.52.2",
+    "pdfjs-dist": "^4.9.155",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-resizable-panels": "^2.1.7",
+    "typescript": "^5.7.2",
+    "vite": "^5.4.11",
+    "zustand": "^5.0.2"
+  }
+}

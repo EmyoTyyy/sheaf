@@ -1,0 +1,96 @@
+.explorer {
+  height: 100%;
+  overflow: auto;
+  padding: 4px 0 12px;
+  user-select: none;
+}
+
+.explorer--empty {
+  padding: 12px;
+  color: var(--text-faint);
+}
+
+.explorer--drop {
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.explorer__row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 21px;
+  padding-right: 8px;
+  white-space: nowrap;
+  color: var(--text);
+}
+
+.explorer__row:hover {
+  background: var(--bg-hover);
+}
+
+.explorer__row--active {
+  background: var(--bg-active);
+  color: var(--text-strong);
+}
+
+.explorer__row--drop {
+  background: var(--accent-subtle);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.explorer__twisty {
+  display: inline-flex;
+  width: 12px;
+  justify-content: center;
+  color: var(--text-faint);
+  flex: none;
+}
+
+.explorer__icon {
+  color: var(--text-dim);
+}
+
+.explorer__row--active .explorer__icon {
+  color: var(--accent);
+}
+
+.explorer__name {
+  flex: 1;
+  min-width: 0;
+}
+
+.explorer__badge {
+  flex: none;
+  padding: 0 4px;
+  border-radius: 2px;
+  background: var(--accent-subtle);
+  color: var(--accent);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.explorer__row--git-modified .explorer__name {
+  color: var(--warning);
+}
+
+.explorer__row--git-untracked .explorer__name,
+.explorer__row--git-added .explorer__name {
+  color: var(--success);
+}
+
+.explorer__row--git-conflicted .explorer__name {
+  color: var(--error);
+}
+
+.explorer__row--git-deleted .explorer__name {
+  color: var(--error);
+  text-decoration: line-through;
+}
+
+.explorer__hint {
+  padding: 14px 12px;
+  color: var(--text-faint);
+  line-height: 1.55;
+}

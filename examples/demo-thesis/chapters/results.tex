@@ -1,0 +1,35 @@
+\chapter{Results}
+\label{ch:results}
+
+\section{Displayed mathematics}
+\label{sec:maths}
+
+Numbered equations are the usual test of whether the document was typeset
+enough times, because the reference below only resolves on a later pass:
+
+\begin{equation}
+    \label{eq:gaussian}
+    \int_{-\infty}^{\infty} e^{-x^{2}} \, \mathrm{d}x = \sqrt{\pi}.
+\end{equation}
+
+\begin{align}
+    \label{eq:gradient}
+    \nabla f(\vect{x}) &= \left( \frac{\partial f}{\partial x_{1}},
+                                 \dots,
+                                 \frac{\partial f}{\partial x_{n}} \right) \\
+    \vect{x}_{t+1}     &= \vect{x}_{t} - \eta \nabla f(\vect{x}_{t})
+\end{align}
+
+Equation~\eqref{eq:gaussian} is standard; Equation~\eqref{eq:gradient} is the
+update rule behind Figure~\ref{fig:convergence}.
+
+\section{Discussion}
+
+The numbers in Table~\ref{tab:results} improve on the baseline described in
+Chapter~\ref{ch:introduction}, at a modest cost in running time.
+
+\begin{itemize}
+    \item Accuracy rises from $0.81$ to $0.96$.
+    \item Running time rises by roughly half.
+    \item Both effects were reproduced across ten seeds.
+\end{itemize}

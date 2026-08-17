@@ -1,0 +1,65 @@
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: var(--size-toolbar);
+  padding: 0 6px;
+  flex: none;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-panel);
+}
+
+.toolbar .divider {
+  margin: 0 3px;
+}
+
+.toolbar__project {
+  max-width: 220px;
+  font-weight: 500;
+  color: var(--text-strong);
+}
+
+.toolbar__compile {
+  min-width: 92px;
+}
+
+.toolbar__select {
+  width: 132px;
+  flex: none;
+  height: 24px;
+}
+
+.toolbar__auto {
+  color: var(--text-dim);
+  padding: 0 2px;
+}
+
+.toolbar__phase {
+  max-width: 220px;
+  color: var(--text-dim);
+}
+
+.toolbar__spacer {
+  flex: 1;
+  min-width: 8px;
+}
+
+.toolbar__main {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  max-width: 220px;
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.toolbar__unsaved {
+  height: 24px;
+  color: var(--accent);
+}
+
+.toolbar__layout {
+  display: flex;
+  gap: 1px;
+}

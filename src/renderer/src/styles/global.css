@@ -1,0 +1,433 @@
+/*
+ * Sheaf design tokens.
+ * A developer tool: dense, quiet, no decoration that does not carry meaning.
+ */
+
+:root {
+  --font-ui: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Ubuntu', 'Cantarell',
+    'Helvetica Neue', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'DejaVu Sans Mono', Menlo, Consolas, monospace;
+
+  --size-titlebar: 36px;
+  --size-toolbar: 38px;
+  --size-tabbar: 32px;
+  --size-statusbar: 24px;
+  --radius: 3px;
+  --radius-lg: 5px;
+
+  --ui-font-size: 12px;
+  --ui-line-height: 1.45;
+
+  --transition: 90ms ease-out;
+}
+
+:root,
+[data-theme='dark'] {
+  --bg: #16181c;
+  --bg-panel: #1b1e23;
+  --bg-elevated: #23272e;
+  --bg-hover: #272c34;
+  --bg-active: #2e343d;
+  --bg-input: #101216;
+  --bg-overlay: rgba(8, 9, 11, 0.6);
+
+  --border: #282d35;
+  --border-strong: #39404a;
+
+  --text: #d6dbe4;
+  --text-strong: #f2f5f9;
+  --text-dim: #8b95a5;
+  --text-faint: #616b7a;
+
+  --accent: #5292d9;
+  --accent-hover: #63a0e4;
+  --accent-fg: #ffffff;
+  --accent-subtle: rgba(82, 146, 217, 0.16);
+
+  --error: #e2606c;
+  --error-subtle: rgba(226, 96, 108, 0.14);
+  --warning: #d9a441;
+  --warning-subtle: rgba(217, 164, 65, 0.14);
+  --info: #5aa9c9;
+  --info-subtle: rgba(90, 169, 201, 0.14);
+  --success: #58b57c;
+
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --pdf-page-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
+  --pdf-backdrop: #101216;
+}
+
+[data-theme='light'] {
+  --bg: #eef0f3;
+  --bg-panel: #f7f8fa;
+  --bg-elevated: #ffffff;
+  --bg-hover: #e8eaef;
+  --bg-active: #dde1e8;
+  --bg-input: #ffffff;
+  --bg-overlay: rgba(30, 34, 40, 0.28);
+
+  --border: #d9dde3;
+  --border-strong: #c2c8d1;
+
+  --text: #2c3138;
+  --text-strong: #14181d;
+  --text-dim: #626b78;
+  --text-faint: #8d95a1;
+
+  --accent: #2f6fbf;
+  --accent-hover: #2a63ab;
+  --accent-fg: #ffffff;
+  --accent-subtle: rgba(47, 111, 191, 0.12);
+
+  --error: #c8404c;
+  --error-subtle: rgba(200, 64, 76, 0.1);
+  --warning: #9a6c12;
+  --warning-subtle: rgba(154, 108, 18, 0.12);
+  --info: #2b7c99;
+  --info-subtle: rgba(43, 124, 153, 0.12);
+  --success: #2f8f56;
+
+  --shadow: 0 8px 24px rgba(20, 24, 30, 0.16);
+  --pdf-page-shadow: 0 1px 6px rgba(20, 24, 30, 0.22);
+  --pdf-backdrop: #d7dae0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-ui);
+  font-size: var(--ui-font-size);
+  line-height: var(--ui-line-height);
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+  cursor: default;
+}
+
+input,
+textarea {
+  user-select: text;
+}
+
+::selection {
+  background: var(--accent-subtle);
+}
+
+/* ---------------- scrollbars ---------------- */
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border: 2px solid transparent;
+  background-clip: content-box;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-faint);
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* ---------------- primitives ---------------- */
+
+button {
+  font: inherit;
+  color: inherit;
+  border: none;
+  background: none;
+  cursor: default;
+  padding: 0;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: -1px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 26px;
+  padding: 0 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--bg-elevated);
+  color: var(--text);
+  white-space: nowrap;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.btn:hover:not(:disabled) {
+  background: var(--bg-hover);
+  border-color: var(--text-faint);
+}
+
+.btn:active:not(:disabled) {
+  background: var(--bg-active);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+}
+
+.btn--primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-fg);
+  font-weight: 500;
+}
+
+.btn--primary:hover:not(:disabled) {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.btn--danger {
+  color: var(--error);
+  border-color: var(--error);
+}
+
+.btn--danger:hover:not(:disabled) {
+  background: var(--error-subtle);
+}
+
+.btn--ghost {
+  border-color: transparent;
+  background: transparent;
+}
+
+.btn--ghost:hover:not(:disabled) {
+  background: var(--bg-hover);
+  border-color: transparent;
+}
+
+.btn--icon {
+  width: 26px;
+  padding: 0;
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  height: 26px;
+  padding: 0 7px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--bg-input);
+  color: var(--text);
+  font: inherit;
+}
+
+.textarea {
+  height: auto;
+  padding: 6px 7px;
+  resize: vertical;
+  font-family: var(--font-mono);
+  line-height: 1.5;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.input::placeholder {
+  color: var(--text-faint);
+}
+
+.select {
+  cursor: default;
+  appearance: none;
+  padding-right: 22px;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: calc(100% - 13px) calc(50% + 1px), calc(100% - 9px) calc(50% + 1px);
+  background-size: 4px 4px, 4px 4px;
+  background-repeat: no-repeat;
+}
+
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.checkbox input {
+  width: 13px;
+  height: 13px;
+  accent-color: var(--accent);
+  margin: 0;
+}
+
+.kbd {
+  display: inline-block;
+  padding: 1px 5px;
+  border: 1px solid var(--border-strong);
+  border-bottom-width: 2px;
+  border-radius: var(--radius);
+  background: var(--bg-elevated);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+.divider {
+  width: 1px;
+  height: 16px;
+  background: var(--border);
+  flex: none;
+}
+
+.spinner {
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid var(--text-faint);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex: none;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation-duration: 2s;
+  }
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 100%;
+  padding: 24px;
+  color: var(--text-faint);
+  text-align: center;
+}
+
+.empty-state h3 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-dim);
+}
+
+.empty-state p {
+  margin: 0;
+  max-width: 320px;
+  line-height: 1.55;
+}
+
+.severity-error {
+  color: var(--error);
+}
+
+.severity-warning {
+  color: var(--warning);
+}
+
+.severity-info {
+  color: var(--info);
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.os-drop-hint {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-overlay);
+  color: var(--text-strong);
+  font-size: 15px;
+  font-weight: 500;
+  border: 2px dashed var(--accent);
+  pointer-events: none;
+}
+
+/* ---------------- resizable panels ---------------- */
+
+[data-panel-group] {
+  overflow: hidden;
+}
+
+.resize-handle {
+  position: relative;
+  flex: none;
+  background: var(--border);
+  transition: background var(--transition);
+}
+
+.resize-handle[data-panel-group-direction='horizontal'] {
+  width: 1px;
+}
+
+.resize-handle[data-panel-group-direction='vertical'] {
+  height: 1px;
+}
+
+.resize-handle::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+}
+
+.resize-handle[data-panel-group-direction='vertical']::after {
+  inset: -3px 0;
+}
+
+.resize-handle:hover,
+.resize-handle[data-resize-handle-active] {
+  background: var(--accent);
+}
